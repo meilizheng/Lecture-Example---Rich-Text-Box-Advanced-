@@ -6,7 +6,26 @@
         xmlns:local="clr-namespace:Lecture_Example___Rich_Text_Box___Advanced__"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
+    <Grid Background="#FF7656A7">
+        <RichTextBox x:Name="rtbDisplay" HorizontalAlignment="Left" Height="413" Margin="480,0,0,0" VerticalAlignment="Center" Width="249" Background="#FF6DDAE8">
+
+        </RichTextBox>
+        <Canvas HorizontalAlignment="Left" Height="413" Margin="74,0,0,0" VerticalAlignment="Center" Width="291" Background="#FF8CBF52">
+            <Label Height="12" Canvas.Left="10" Canvas.Top="24" Width="85">
+                <Label Content="Label" Height="28" Width="46"/>
+            </Label>
+            <Label x:Name="lbSubjectLine" Content="Subject Line" Height="32" Canvas.Left="10" Canvas.Top="24" Width="85"/>
+            <TextBox x:Name="txtHeader" Height="30" Canvas.Left="10" TextWrapping="Wrap" Canvas.Top="56" Width="97"/>
+            <Label x:Name="lbBody" Content="Body" Height="33" Canvas.Left="10" Canvas.Top="91" Width="85"/>
+            <Button x:Name="btnDisply" Content="Display" Height="20" Canvas.Left="10" Canvas.Top="259" Width="153" Click="btnDisply_Click"/>
+            <RichTextBox Height="106" Canvas.Left="10" Canvas.Top="129" Width="187">
+                <FlowDocument>
+                    <Paragraph>
+                        <Run x:Name="rtbRunBody"  Text="RichTextBox"/>
+                    </Paragraph>
+                </FlowDocument>
+            </RichTextBox>
+        </Canvas>
 
     </Grid>
 </Window>
