@@ -6,11 +6,9 @@
         xmlns:local="clr-namespace:Lecture_Example___Rich_Text_Box___Advanced__"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid Background="#FF7656A7">
-        <RichTextBox x:Name="rtbDisplay" HorizontalAlignment="Left" Height="413" Margin="480,0,0,0" VerticalAlignment="Center" Width="249" Background="#FF6DDAE8">
-
-        </RichTextBox>
-        <Canvas HorizontalAlignment="Left" Height="413" Margin="74,0,0,0" VerticalAlignment="Center" Width="291" Background="#FF8CBF52">
+    <Canvas Background="#FF7656A7">
+        <RichTextBox x:Name="rtbDisplay" HorizontalAlignment="Left" Height="413" VerticalAlignment="Center" Width="248" Background="#FF6DDAE8" Canvas.Left="276" Canvas.Top="10"/>
+        <Canvas HorizontalAlignment="Left" Height="413" VerticalAlignment="Top" Width="237" Background="#FF8CBF52" Canvas.Left="21" Canvas.Top="11">
             <Label Height="12" Canvas.Left="10" Canvas.Top="24" Width="85">
                 <Label Content="Label" Height="28" Width="46"/>
             </Label>
@@ -26,6 +24,7 @@
                 </FlowDocument>
             </RichTextBox>
         </Canvas>
+        <ListBox x:Name="lbBlogPost" Height="412" Canvas.Left="544" Canvas.Top="12" Width="235" d:ItemsSource="{d:SampleData ItemCount=5}" HorizontalAlignment="Left" VerticalAlignment="Center" Background="#FF71D6B3" SelectionChanged="lbBlogPost_SelectionChanged"/>
 
-    </Grid>
+    </Canvas>
 </Window>

@@ -21,6 +21,7 @@ namespace Lecture_Example___Rich_Text_Box___Advanced__
     public partial class MainWindow : Window
     {
        FlowDocument fdDisplay = new FlowDocument();
+       List<BlogPost> blogPosts = new List<BlogPost>();
         public MainWindow()
         {          
             InitializeComponent();
@@ -59,46 +60,40 @@ namespace Lecture_Example___Rich_Text_Box___Advanced__
 
         private void btnDisply_Click(object sender, RoutedEventArgs e)
         {
-
-            fdDisplay.Blocks.Add(BlogpostFormatted());
-
-
-
+            string subjectline = txtHeader.Text;
+            string bodytext = rtbRunBody.Text;
+            BlogPost bp = new BlogPost(subjectline, bodytext);
+            blogPosts.Add(bp);
+            fdDisplay.Blocks.Add(blogPosts[0].BlogpostFormatted());
+            DisplayBlogPost();
+            UpdateRichTextBox(blogPosts[blogPosts.Count - 1]);
             rtbDisplay.Document = fdDisplay;
         }
-        
-        public Run HeaderFormatted(string subjectline)
+
+        public void DisplayBlogPost()
         {
-            Run headerrun = new Run(subjectline);
-            headerrun.FontSize = 18;
-            headerrun.Foreground = new SolidColorBrush(Colors.Cyan);
-            headerrun.FontStyle = FontStyles.Oblique;
-            return headerrun;
-        }
-        
-        public Run BodyFormatted(string bodyText)
-        {
-            Run runNewBody = new Run(bodyText);
-            runNewBody.FontSize = 16;
-            runNewBody.FontWeight = FontWeights.Bold;
-            runNewBody.FontStyle = FontStyles.Italic;
-            runNewBody.Foreground = new SolidColorBrush(Colors.White);
-            return runNewBody;
+            lbBlogPost.Items.Clear();
+
+            foreach(BlogPost item in blogPosts)
+            {
+                lbBlogPost.Items.Add(item);
+            }
         }
 
-        public Paragraph BlogpostFormatted()
+        private void lbBlogPost_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            Paragraph newParagraph = new Paragraph();
-            string subjectline = txtHeader.Text;
-            string bodyText = rtbRunBody.Text;
-            Run header = HeaderFormatted(subjectline);
-            Run body = BodyFormatted(bodyText);
-            newParagraph.Inlines.Add(subjectline);
-            newParagraph.Inlines.Add("\n");
-            newParagraph.Inlines.Add(body);
-            return newParagraph;         
-
+            int selected = lbBlogPost.SelectedIndex;
+            if (selected >= 0)
+            {
+                BlogPost bp = blogPosts[selected];
+                UpdateRichTextBox(bp);
+            }                       
         }
 
+        public void UpdateRichTextBox(BlogPost post)
+        {
+            fdDisplay.Blocks.Clear();
+            fdDisplay.Blocks.Add(post.BlogpostFormatted());
+        }
     }
 }
