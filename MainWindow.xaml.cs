@@ -59,21 +59,46 @@ namespace Lecture_Example___Rich_Text_Box___Advanced__
 
         private void btnDisply_Click(object sender, RoutedEventArgs e)
         {
-            Paragraph newParagraph = new Paragraph();
-            string subjectline = txtHeader.Text;
-            string body = rtbRunBody.Text;
+
+            fdDisplay.Blocks.Add(BlogpostFormatted());
+
+
+
+            rtbDisplay.Document = fdDisplay;
+        }
+        
+        public Run HeaderFormatted(string subjectline)
+        {
             Run headerrun = new Run(subjectline);
             headerrun.FontSize = 18;
             headerrun.Foreground = new SolidColorBrush(Colors.Cyan);
-            Run runNewBody = new Run(body);
+            headerrun.FontStyle = FontStyles.Oblique;
+            return headerrun;
+        }
+        
+        public Run BodyFormatted(string bodyText)
+        {
+            Run runNewBody = new Run(bodyText);
             runNewBody.FontSize = 16;
             runNewBody.FontWeight = FontWeights.Bold;
+            runNewBody.FontStyle = FontStyles.Italic;
             runNewBody.Foreground = new SolidColorBrush(Colors.White);
-            newParagraph.Inlines.Add(headerrun);
-            newParagraph.Inlines.Add("\n");
-            newParagraph.Inlines.Add(runNewBody);
-            fdDisplay.Blocks.Add(newParagraph);
-            rtbDisplay.Document = fdDisplay;
+            return runNewBody;
         }
+
+        public Paragraph BlogpostFormatted()
+        {
+            Paragraph newParagraph = new Paragraph();
+            string subjectline = txtHeader.Text;
+            string bodyText = rtbRunBody.Text;
+            Run header = HeaderFormatted(subjectline);
+            Run body = BodyFormatted(bodyText);
+            newParagraph.Inlines.Add(subjectline);
+            newParagraph.Inlines.Add("\n");
+            newParagraph.Inlines.Add(body);
+            return newParagraph;         
+
+        }
+
     }
 }
